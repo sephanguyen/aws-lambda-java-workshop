@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.dragonresort</groupId>
+  <artifactId>application</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>application</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>17</maven.compiler.release>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.11.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+        <!-- AWS Lambda Core -->
+    <!-- Provides the basic Lambda handler interfaces -->
+    <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-lambda-java-core</artifactId>
+        <version>1.2.3</version>
+    </dependency>
+
+    <!-- AWS Lambda Events -->
+    <!-- Handles API Gateway events -->
+    <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-lambda-java-events</artifactId>
+        <version>3.11.3</version>
+    </dependency>
+
+    <!-- DynamoDB SDK -->
+    <!-- Core DynamoDB operations -->
+    <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>dynamodb</artifactId>
+        <version>2.30.11</version>
+    </dependency>
+    <!-- FasterXML Jackson -->
+    <!-- Transform dragons to/from JSON -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.jr</groupId>
+        <artifactId>jackson-jr-objects</artifactId>
+        <version>2.18.2</version>
+    </dependency>
+    <!-- Simple Logging Facade for Java (SLF4J) -->
+    <!-- Libraries needed for SAM cli -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>2.0.16</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>2.0.16</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+        <!-- Clean your assets folder -->
+        <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>3.4.0</version>
+            <configuration>
+                <filesets>
+                    <fileset>
+                        <directory>assets</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                        <followSymlinks>false</followSymlinks>
+                    </fileset>
+                </filesets>
+            </configuration>
+        </plugin>
+        <!-- Maven Shade Plugin - Package your dragon application -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.6.0</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <finalName>DragonResort</finalName>
+                <outputDirectory>assets</outputDirectory>
+            </configuration>
+        </plugin>
+    </plugins>
+  </build>
+</project>
