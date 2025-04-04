@@ -146,7 +146,7 @@
                         <plugin>
                             <groupId>software.amazon.lambda.snapstart</groupId>
                             <artifactId>aws-lambda-snapstart-java-rules</artifactId>
-                            <version>0.2.0</version>
+                            <version>0.2.1</version>
                         </plugin>
                     </plugins>
                     <excludeFilterFile>misc/ignore.xml</excludeFilterFile>
